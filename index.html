@@ -1,623 +1,316 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kinesiología & Fisioterapia | Rehabilitación Integral</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinesiología & Fisioterapia | Rehabilitación Integral</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- GSAP Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-    <style>
-        :root {
-            --bg-dark: #0d0f14;
-            --bg-card: #151923;
-            --primary: #00e5ff;
-            --secondary: #4caf50;
-            --text-light: #ffffff;
-            --text-muted: #b0b0b0;
-            --glow: 0 0 15px rgba(0,229,255,0.6);
-            --glow-strong: 0 0 30px rgba(0,229,255,0.8);
-        }
+<style>
+:root{
+  --bg-dark:#0d0f14;
+  --bg-card:#151923;
+  --primary:#00e5ff;
+  --text-light:#fff;
+  --text-muted:#b0b0b0;
+  --glow:0 0 15px rgba(0,229,255,.6);
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
-        body {
-            background: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+body{
+  background:var(--bg-dark);
+  color:var(--text-light);
+  line-height:1.6;
+  overflow-x:hidden;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+section{
+  padding:80px 10%;
+}
 
-        section {
-            padding: 80px 10%;
-            will-change: transform, opacity; /* Performance: Hint for GPU acceleration */
-        }
+h1,h2,h3{font-weight:700}
+p{color:var(--text-muted);margin-top:10px}
 
-        h1, h2, h3 {
-            font-weight: 700;
-        }
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:20px;
+  position:relative;
+  background:
+    linear-gradient(rgba(13,15,20,.85),rgba(13,15,20,.85)),
+    url("images/hero.jpg") center/cover;
+}
 
-        p {
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
+.hero h1{
+  font-size:3rem;
+  text-transform:uppercase;
+}
 
-        /* Floating Particles for Futuristic Effect */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+.hero span{color:var(--primary)}
 
-        .particle {
-            position: absolute;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 0.1;
-            will-change: transform;
-        }
+.hero-buttons{
+  margin-top:30px;
+  display:flex;
+  gap:20px;
+}
 
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 20px;
-            position: relative;
-            overflow: hidden;
-            background:
-                linear-gradient(rgba(13,15,20,0.85), rgba(13,15,20,0.85)),
-                url("images/hero.jpg");
-            background-size: cover;
-            background-position: center;
-            will-change: transform;
-        }
+/* BUTTONS */
+.btn{
+  padding:15px 30px;
+  border-radius:30px;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s;
+}
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.1) 0%, transparent 70%);
-        }
+.btn-primary{
+  background:var(--primary);
+  color:#000;
+  box-shadow:var(--glow);
+}
 
-        .hero h1 {
-            font-size: 3rem;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-            will-change: transform, text-shadow;
-        }
+.btn-primary:hover{transform:scale(1.05)}
 
-        .hero span {
-            color: var(--primary);
-        }
+.btn-secondary{
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
 
-        .hero p {
-            position: relative;
-            z-index: 1;
-            will-change: transform, opacity;
-        }
+.btn-secondary:hover{
+  background:var(--primary);
+  color:#000;
+}
 
-        .hero-buttons {
-            margin-top: 30px;
-            display: flex;
-            gap: 20px;
-            position: relative;
-            z-index: 1;
-            will-change: transform;
-        }
+/* ABOUT */
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
 
-        .btn {
-            padding: 15px 30px;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-            will-change: transform, box-shadow;
-        }
+.about img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:var(--glow);
+}
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
+/* SERVICES */
+.section-title{text-align:center;margin-bottom:50px}
+.section-title h2{color:var(--primary);font-size:2.2rem}
 
-        .btn:hover::before {
-            left: 100%;
-        }
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
 
-        .btn-primary {
-            background: var(--primary);
-            color: #000;
-            box-shadow: var(--glow);
-        }
+.card{
+  background:var(--bg-card);
+  padding:30px;
+  border-radius:20px;
+  transition:.3s;
+}
 
-        .btn-primary:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: var(--glow-strong);
-        }
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:var(--glow);
+}
 
-        .btn-secondary {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-        }
+.card img{
+  width:100%;
+  border-radius:15px;
+  margin-bottom:15px;
+}
 
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: #000;
-            transform: scale(1.05) rotate(-1deg);
-            box-shadow: var(--glow);
-        }
+.card h3{color:var(--primary)}
 
-        /* ABOUT */
-        .about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            will-change: transform, opacity;
-        }
+ul{list-style:none;margin-top:15px}
+ul li{margin-bottom:8px;color:var(--text-muted)}
 
-        .about img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: var(--glow);
-            transition: transform 0.5s;
-            will-change: transform;
-        }
+/* STEPS */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:30px;
+  text-align:center;
+}
 
-        .about img:hover {
-            transform: scale(1.05);
-        }
+.step{
+  background:var(--bg-card);
+  padding:25px;
+  border-radius:20px;
+}
 
-        /* SECTIONS */
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+/* IMAGE BREAK */
+.image-break{
+  text-align:center;
+  padding:120px 10%;
+  background:
+    linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+    url("images/break.jpg") center/cover;
+}
 
-        .section-title h2 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-            will-change: transform;
-        }
+.image-break h2{
+  font-size:2.5rem;
+  color:var(--primary);
+}
 
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: var(--primary);
-            will-change: width;
-        }
+/* CTA */
+.cta{
+  text-align:center;
+  background:radial-gradient(circle at top,#0f2027,#000);
+}
 
-        /* CARDS */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  color:var(--text-muted);
+  font-size:.9rem;
+}
 
-        .card {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 20px;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-            will-change: transform, box-shadow;
-        }
-
-        .card img {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            loading: lazy; /* Performance: Lazy load images */
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,229,255,0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .card:hover::before {
-            left: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: var(--glow-strong);
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-            transition: color 0.3s;
-            will-change: color;
-        }
-
-        .card:hover h3 {
-            color: #00ff88;
-        }
-
-        ul {
-            list-style: none;
-            margin-top: 15px;
-        }
-
-        ul li {
-            margin-bottom: 10px;
-            color: var(--text-muted);
-            transition: color 0.3s, transform 0.3s;
-            will-change: color, transform;
-        }
-
-        .card:hover ul li {
-            color: var(--text-light);
-            transform: translateX(10px);
-        }
-
-        /* METHOD */
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-
-        .step {
-            padding: 25px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            will-change: transform, box-shadow;
-        }
-
-        .step:hover {
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: var(--glow);
-        }
-
-        .step h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            transition: color 0.3s;
-            will-change: color;
-        }
-
-        .step:hover h3 {
-            color: #00ff88;
-        }
-
-        /* IMAGE BREAK */
-        .image-break {
-            text-align: center;
-            padding: 120px 10%;
-            background:
-                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                url("images/break.jpg");
-            background-size: cover;
-            background-position: center;
-            will-change: transform, opacity;
-        }
-
-        .image-break h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            will-change: transform;
-        }
-
-        /* CTA */
-        .cta {
-            text-align: center;
-            background: radial-gradient(circle at top, #0f2027, #000);
-            position: relative;
-            will-change: transform, opacity;
-        }
-
-        .cta::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(0,229,255,0.1)"/></svg>') repeat;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            position: relative;
-            z-index: 1;
-            will-change: transform;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            will-change: transform, opacity;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .about {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 60px 5%;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+@media(max-width:768px){
+  .hero h1{font-size:2.2rem}
+  .about{grid-template-columns:1fr}
+  section{padding:60px 5%}
+  .hero-buttons{flex-direction:column}
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
+<!-- HERO -->
+<section class="hero">
+  <h1>Recuperá tu <span>movimiento</span><br>Volvé a vivir sin dolor</h1>
+  <p>Kinesiología · Fisioterapia · Rehabilitación Integral</p>
 
-    <!-- HERO -->
-    <section class="hero">
-        <h1>Recuperá tu <span>movimiento</span><br>Volvé a vivir sin dolor</h1>
-        <p>Kinesiología · Fisioterapia · Rehabilitación Integral<br>
-        Tratamientos modernos, personalizados y basados en ciencia.</p>
+  <div class="hero-buttons">
+    <a class="btn btn-primary"
+       target="_blank"
+       href="https://wa.me/595991786327?text=Hola,%20quiero%20agendar%20una%20evaluación">
+       Agendar evaluación
+    </a>
 
-        <div class="hero-buttons">
-                       <a href="https://wa.me/595991786327?text=Hola,%20quiero%20agendar%20una%20evaluación%20de%20kinesiología."
-   target="_blank"
-   class="btn btn-primary">
-   Agendar evaluación
-</a>
+    <a class="btn btn-secondary"
+       target="_blank"
+       href="https://wa.me/595991786327?text=Hola,%20quisiera%20hacer%20una%20consulta">
+       Consultar ahora
+    </a>
+  </div>
+</section>
 
-<a href="https://wa.me/595991786327?text=Hola,%20quisiera%20hacer%20una%20consulta%20sobre%20tratamientos."
-   target="_blank"
-   class="btn btn-secondary">
-   Consultar ahora
-</a>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section class="about">
+  <div>
+    <h2>Atención profesional personalizada</h2>
+    <p>Tratamientos modernos, basados en ciencia y adaptados a cada persona.</p>
+  </div>
+  <img src="images/about.jpg" alt="Fisioterapia profesional" loading="lazy">
+</section>
 
-    <!-- ABOUT -->
-    <section class="about">
-        <div>
-            <h2>Atención profesional personalizada</h2>
-            <p>
-                Tratamientos modernos, basados en ciencia y adaptados a cada persona.
-                El objetivo es claro: menos dolor, más movimiento y mejor calidad de vida.
-            </p>
-        </div>
-        <img src="images/about.jpg" alt="Fisioterapia profesional" loading="lazy">
-    </section>
+<!-- SERVICES -->
+<section>
+  <div class="section-title"><h2>Servicios</h2></div>
+  <div class="cards">
 
-    <!-- SERVICIOS -->
-    <section>
-        <div class="section-title">
-            <h2>Servicios</h2>
-        </div>
+    <div class="card">
+      <img src="images/kinesiologia.jpg" loading="lazy">
+      <h3>Kinesiología</h3>
+      <ul>
+        <li>Evaluación funcional</li>
+        <li>Prevención de lesiones</li>
+        <li>Optimización del movimiento</li>
+      </ul>
+    </div>
 
-        <div class="cards">
-            <div class="card">
-                <img src="images/kinesiologia.jpg" alt="Kinesiología" loading="lazy">
-                <h3>Kinesiología</h3>
-                <ul>
-                    <li>Evaluación funcional completa</li>
-                    <li>Prevención de lesiones</li>
-                    <li>Mejora del movimiento y postura</li>
-                    <li>Readaptación física</li>
-                </ul>
-            </div>
+    <div class="card">
+      <img src="images/fisioterapia.jpg" loading="lazy">
+      <h3>Fisioterapia</h3>
+      <ul>
+        <li>Dolor muscular</li>
+        <li>Reeducación postural</li>
+        <li>Post quirúrgico</li>
+      </ul>
+    </div>
 
-            <div class="card">
-                <img src="images/fisioterapia.jpg" alt="Fisioterapia" loading="lazy">
-                <h3>Fisioterapia</h3>
-                <ul>
-                    <li>Dolor muscular y articular</li>
-                    <li>Lesiones agudas y crónicas</li>
-                    <li>Reeducación postural</li>
-                    <li>Recuperación post quirúrgica</li>
-                </ul>
-            </div>
+    <div class="card">
+      <img src="images/rehabilitacion.jpg" loading="lazy">
+      <h3>Rehabilitación</h3>
+      <ul>
+        <li>Funcional</li>
+        <li>Post trauma</li>
+        <li>Retorno seguro</li>
+      </ul>
+    </div>
 
-            <div class="card">
-                <img src="images/rehabilitacion.jpg" alt="Rehabilitación" loading="lazy">
-                <h3>Rehabilitación</h3>
-                <ul>
-                    <li>Rehabilitación funcional progresiva</li>
-                    <li>Recuperación post trauma</li>
-                    <li>Reeducación neuromuscular</li>
-                    <li>Retorno seguro a la actividad</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+  </div>
+</section>
 
-    <!-- MÉTODO -->
-    <section>
-        <div class="section-title">
-            <h2>Cómo trabajo</h2>
-        </div>
+<!-- METHOD -->
+<section>
+  <div class="section-title"><h2>Cómo trabajo</h2></div>
+  <div class="steps">
+    <div class="step">Evaluación precisa</div>
+    <div class="step">Plan personalizado</div>
+    <div class="step">Tratamiento activo</div>
+    <div class="step">Resultados reales</div>
+  </div>
+</section>
 
-        <div class="steps">
-            <div class="step">
-                <h3>Evaluación profesional</h3>
-                <p>Detectamos la causa real del problema.</p>
-            </div>
+<!-- IMAGE BREAK -->
+<section class="image-break">
+  <h2>Tu cuerpo puede más</h2>
+  <p>Solo necesita el tratamiento correcto</p>
+</section>
 
-            <div class="step">
-                <h3>Plan personalizado</h3>
-                <p>Tratamiento diseñado según tus objetivos.</p>
-            </div>
+<!-- CTA -->
+<section class="cta">
+  <h2>Empezá hoy tu recuperación</h2>
+  <p>Agendá tu evaluación profesional</p>
+  <a class="btn btn-primary"
+     target="_blank"
+     href="https://wa.me/595991786327">
+     Contacto directo
+  </a>
+</section>
 
-            <div class="step">
-                <h3>Tratamiento efectivo</h3>
-                <p>Sesiones activas y basadas en evidencia.</p>
-            </div>
+<footer>
+© 2026 · Kinesiología & Fisioterapia
+</footer>
 
-            <div class="step">
-                <h3>Resultados reales</h3>
-                <p>Seguimiento continuo y prevención de recaídas.</p>
-            </div>
-        </div>
-    </section>
+<!-- GSAP ANIMATIONS -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
 
-    <!-- IMAGE BREAK -->
-    <section class="image-break">
-        <h2>Tu cuerpo puede más</h2>
-        <p>Solo necesita el tratamiento correcto</p>
-    </section>
+gsap.utils.toArray("section").forEach(section=>{
+  gsap.from(section,{
+    opacity:0,
+    y:60,
+    duration:1,
+    scrollTrigger:{
+      trigger:section,
+      start:"top 85%"
+    }
+  });
+});
+</script>
 
-    <!-- CTA -->
-    <section class="cta">
-        <h2>Empezá hoy tu recuperación</h2>
-        <p>Agendá una evaluación profesional y da el primer paso hacia una vida sin dolor.</p>
-
-        <div class="hero-buttons" style="justify-content:center;">
-            <a href="#" class="btn btn-primary">Agendar evaluación</a>
-            <a href="#" class="btn btn-secondary">Contacto directo</a>
-        </div>
-    </section>
-
-    <footer>
-        © 2026 · Kinesiología & Fisioterapia · Todos los derechos reservados
-    </footer>
-
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Performance: Create particle system dynamically for futuristic background (limited for perf)
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) { // Limit to 50 for performance
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = Math.random() * 4 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particlesContainer.appendChild(particle);
-
-            // Animate particles with GSAP for floating effect
-            gsap.to(particle, {
-                y: -100,
-                x: Math.random() * 200 - 100,
-                opacity: 0,
-                duration: Math.random() * 10 + 5,
-                ease: "none",
-                repeat: -1,
-                delay: Math.random() * 5
-            });
-        }
-
-        // Hero parallax effects: Enhanced with more layers and smoother scrub
-        gsap.to('.hero::before', {
-            y: -300, // Deeper parallax
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5 // Smoother scrub
-            }
-        });
-
-        gsap.to('.hero h1', {
-            y: -150,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5
-            }
-        });
-
-        gsap.to('.hero p', {
-            y: -75,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5
-            }
-        });
-
-        gsap.to('.hero-buttons', {
-            y: -50,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5
-            }
-        });
-
-        // Additional parallax for image-break background
-        gsap.to('.image-break', {
-            backgroundPosition: '50% 100px', // Subtle background move
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".image-break",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1
-            }
-        });
-
-        // Hero animations: Enhanced with typing effect simulation for futuristic feel
-        const heroTl = gsap.timeline();
-        heroTl.to('.hero::before', { scale: 1.1, opacity: 1, duration: 2, ease: "power4.inOut", repeat: -1, yoyo: true })
-            .from('.hero h1', { textShadow: 'none', duration: 1.5
+</body>
+</html>
